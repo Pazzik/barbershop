@@ -15,9 +15,34 @@
 
   <div class="form-group">
     <label>Enter date and visit time</label>
-    <input name="date_time" type="text" class="form-control" placeholder="Enter your visit time">
+    <input id="aaa" name="date_time" type="text" class="form-control" placeholder="Enter your visit time">
   </div>
 
-  <button type="submit" class="btn btn-primary">visit</button>
+  <div class="form-group">
+  	<label>Select person</label>
+  	<select class="form-control" name="person">
+  		<option value="Walter White">Walter White</option>
+  		<option value="Jessie Pinkman">Jessie Pinkman</option>
+  		<option value="Gus Fring">Gus Fring</option>
+  	</select>
+  </div>
+
+  <div class="form-group">
+    <label>Select color:</label> <input id="color-picker" type="text" name="color_picker" value="#333399" />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Visit</button>
 
 </form>
+
+<!---
+<script type="text/javascript">
+  $('#aaa').css('background-color','yellow')
+  $('.form-control').css('background-color','green')
+</script>
+-->
+<script type="text/javascript">
+     $(document).ready(function(){
+        $('#color-picker').colorPicker();
+    });
+</script>
