@@ -26,21 +26,15 @@ post '/visit' do
 	@person		= params[:person]
 	@color		= params[:color_picker]
 
-	if @username == ''
-		@error = 'Enter your name'		
-	end
+	hh = { :username => 'Enter your name',
+		   :phone => 'Enter your phone',
+		   :date_time => 'Enter date and time'}
 
-	if @phone == ''
-		@error = 'Enter your phone'
-	end
-
-	if @date_time == ''
-		@error = 'Enter date and time visit'
-	end
-	
-
-	if error != ''
-		return erb :visit
+	hh.each do |key,value|
+		if 	params[key] == ''
+			@error = hh[key]
+			return erb :visit
+		end
 	end
 
 	f = File.open("./public/users.txt", "a") 
