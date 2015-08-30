@@ -15,7 +15,7 @@
 
   <div class="form-group">
     <label>Enter date and visit time</label>
-    <input name="date_time" type="text" class="form-control" placeholder="Enter your visit time" value="<%=@date_time %>">
+    <input id="datetimepicker" name="date_time" type="text" class="form-control" placeholder="Enter your visit time" value="<%=@date_time %>">
   </div>
 
   <div class="form-group">
@@ -38,5 +38,6 @@
 <script type="text/javascript">
      $(document).ready(function(){
         $('#color-picker').colorPicker();
+        $('#datetimepicker').datetimepicker();
     });
 </script>
