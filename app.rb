@@ -53,7 +53,6 @@ get '/' do
 end
 
 get '/about' do
-	@error = "something wrong"
 	erb :about
 end
 
@@ -104,10 +103,11 @@ post '/visit' do
 	 			)
 				values(?,?,?,?,?)', [@username,@phone,@date_time,@person,@color]
 
+
 	f = File.open("./public/users.txt", "a") 
 	f.write("User: #{@username} Phone: #{@phone} Date and Time: #{@date_time} Person: #{@person} Color: #{@color}\n");
 	f.close;
 
-	erb :visit
+	erb "<h2>Thanks for visit</h2>"
 end
 
