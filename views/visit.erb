@@ -21,9 +21,9 @@
   <div class="form-group">
   	<label>Select person</label>
   	<select class="form-control" name="person">
-  		<option <%= @person == 'Walter White' ? 'selected' : '' %> value="Walter White">Walter White</option>
-  		<option <%= @person == 'Jessie Pinkman' ? 'selected' : '' %> value="Jessie Pinkman">Jessie Pinkman</option>
-  		<option <%= @person == 'Gus Fring' ? 'selected' : '' %> value="Gus Fring">Gus Fring</option>
+      <% @persons.each do |item| %>
+        <option <%= item['person'] == @person ? 'selected' : ''%>><%=item['person'] %> </option>
+      <% end %> 
   	</select>
   </div>
 

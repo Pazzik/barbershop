@@ -4,7 +4,26 @@ require 'sinatra/reloader'
 require 'sqlite3'
 
 def get_db
-	return  SQLite3::Database.new 'barbershop.db'
+	db = SQLite3::Database.new 'barbershop.db'
+	db.results_as_hash = true
+	return  db
+end
+
+def is_barber_exist? db,person
+	db.execute('select * from Persons where person=?',[person]).length > 0
+end
+
+def seed_db db, persons
+	persons.each do |person|
+		unless is_barber_exist? db,person
+			db.execute 'INSERT INTO	Persons	(person) values(?)',person
+		end
+	end	
+end
+
+before do
+	db = get_db
+	@persons = db.execute 'select * from Persons'
 end
 
 configure do
@@ -19,6 +38,14 @@ configure do
 			"person" TEXT,
 			"color" TEXT
 		)'
+	db.execute 'CREATE TABLE IF NOT EXISTS
+		"Persons"
+		(
+			"id" INTEGER PRIMARY KEY AUTOINCREMENT,
+			"person" TEXT
+		)'
+	
+	seed_db db, ['Walter White','Jessie Pinkman','Gus Fring']
 end
 
 get '/' do
@@ -36,6 +63,15 @@ end
 
 get '/contacts' do
 	erb :contacts
+end
+
+get '/showusers' do
+	@users = []
+	db = get_db
+	db.execute 'select * from Users order by id desc' do |row|
+		@users << row
+	end
+	erb :showusers
 end
 
 post '/visit' do
@@ -67,6 +103,7 @@ post '/visit' do
 	 				color
 	 			)
 				values(?,?,?,?,?)', [@username,@phone,@date_time,@person,@color]
+
 	f = File.open("./public/users.txt", "a") 
 	f.write("User: #{@username} Phone: #{@phone} Date and Time: #{@date_time} Person: #{@person} Color: #{@color}\n");
 	f.close;

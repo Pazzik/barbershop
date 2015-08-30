@@ -1,0 +1,22 @@
+<table class="table table-striped">
+	<thead>
+		<th>#</th>
+		<th>Name</th>
+		<th>Phone</th>
+		<th>Date</th>
+		<th>Person</th>
+		<th>Color</th>
+	</thead>
+	<tbody>
+		<% @users.each do |user| %>
+		<tr>
+			<td><%= user['id'] %></td>
+			<td><%= user['username'] %></td>
+			<td><%= user['phone'] %></td>
+			<td><%= user['datestamp'] %></td>
+			<td><%= user['person'] %></td>
+			<td><%= user['color'] %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
